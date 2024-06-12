@@ -1,5 +1,6 @@
 use std::io::{self, Write};
 
+#[derive(Debug)]
 struct Rectangle {
     width: u32,
     height: u32,
@@ -30,9 +31,8 @@ fn main() {
 
     let height: u32 = input.trim().parse().unwrap();
 
-    let rectangle = Rectangle { width, height };
-
-    let rectangle_area = rectangle.area();
+    let rectangle = dbg!(Rectangle { width, height });
+    let rectangle_area = dbg!(rectangle.area());
 
     println!(
         "The rectangle has w:{}cm, h:{}cm. Its area is: {}cm",
