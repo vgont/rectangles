@@ -5,6 +5,12 @@ struct Rectangle {
     height: u32,
 }
 
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
 fn main() {
     println!("\nInsert the rectangle values\n");
 
@@ -26,14 +32,10 @@ fn main() {
 
     let rectangle = Rectangle { width, height };
 
-    let rectangle_area = calculate_area(&rectangle);
+    let rectangle_area = rectangle.area();
 
     println!(
         "The rectangle has w:{}cm, h:{}cm. Its area is: {}cm",
         rectangle.width, rectangle.height, rectangle_area
     )
-}
-
-fn calculate_area(rectangle: &Rectangle) -> u32 {
-    rectangle.width * rectangle.height
 }
