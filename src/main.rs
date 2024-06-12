@@ -13,6 +13,9 @@ impl Rectangle {
     fn is_width_nonzero(&self) -> bool {
         self.width > 0
     }
+    fn can_hold(&self, rect: &Rectangle) -> bool {
+        self.width >= rect.width && self.height >= rect.height
+    }
 }
 
 fn main() {
@@ -34,16 +37,26 @@ fn main() {
 
     let height: u32 = input.trim().parse().unwrap();
 
-    let rectangle = dbg!(Rectangle { width, height });
-    let rectangle_area = dbg!(rectangle.area());
+    let rect = dbg!(Rectangle { width, height });
+
+    let rect2 = Rectangle {
+        width: 5,
+        height: 10,
+    };
+
+    let rect3 = Rectangle {
+        width: 10,
+        height: 20,
+    };
 
     println!(
-        "The rectangle has w:{}cm, h:{}cm. Its area is: {}cm",
-        rectangle.width, rectangle.height, rectangle_area
+        "The rect has w:{}cm, h:{}cm. Its area is: {}cm",
+        rect.width,
+        rect.height,
+        rect.area()
     );
 
-    println!(
-        "The rectangle has a nonzero width: {}",
-        rectangle.is_width_nonzero()
-    );
+    println!("The rect has a nonzero width: {}", rect.is_width_nonzero());
+    println!("Your rect fits a {:?}: {}", rect2, rect.can_hold(&rect2));
+    println!("Your rect fits a {:?}: {}", rect3, rect.can_hold(&rect3));
 }
