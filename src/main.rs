@@ -1,5 +1,3 @@
-use std::io::{self, Write};
-
 #[derive(Debug)]
 struct Rectangle {
     width: u32,
@@ -16,28 +14,20 @@ impl Rectangle {
     fn can_hold(&self, rect: &Rectangle) -> bool {
         self.width >= rect.width && self.height >= rect.height
     }
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
+    }
 }
 
 fn main() {
-    println!("\nInsert the rectangle values\n");
-
-    print!("Width(cm): ");
-    io::stdout().flush().unwrap();
-    let mut input = String::new();
-
-    io::stdin().read_line(&mut input).unwrap();
-
-    let width: u32 = input.trim().parse().unwrap();
-
-    print!("Height(cm): ");
-    io::stdout().flush().unwrap();
-    let mut input = String::new();
-
-    io::stdin().read_line(&mut input).unwrap();
-
-    let height: u32 = input.trim().parse().unwrap();
-
-    let rect = dbg!(Rectangle { width, height });
+    let rect = Rectangle {
+        width: 20,
+        height: 25,
+    };
+    dbg!(&rect);
 
     let rect2 = Rectangle {
         width: 5,
@@ -49,14 +39,11 @@ fn main() {
         height: 20,
     };
 
-    println!(
-        "The rect has w:{}cm, h:{}cm. Its area is: {}cm",
-        rect.width,
-        rect.height,
-        rect.area()
-    );
+    let square_rect = Rectangle::square(10);
+    dbg!(&square_rect);
 
+    println!("The rect area is: {}cm", rect.area());
     println!("The rect has a nonzero width: {}", rect.is_width_nonzero());
-    println!("Your rect fits a {:?}: {}", rect2, rect.can_hold(&rect2));
-    println!("Your rect fits a {:?}: {}", rect3, rect.can_hold(&rect3));
+    println!("Rect fits a {:?}: {}", rect2, rect.can_hold(&rect2));
+    println!("Rect fits a {:?}: {}", rect3, rect.can_hold(&rect3));
 }
