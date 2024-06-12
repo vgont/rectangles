@@ -10,12 +10,15 @@ impl Rectangle {
     fn area(&self) -> u32 {
         self.width * self.height
     }
+    fn is_width_nonzero(&self) -> bool {
+        self.width > 0
+    }
 }
 
 fn main() {
     println!("\nInsert the rectangle values\n");
 
-    print!("Width: ");
+    print!("Width(cm): ");
     io::stdout().flush().unwrap();
     let mut input = String::new();
 
@@ -23,7 +26,7 @@ fn main() {
 
     let width: u32 = input.trim().parse().unwrap();
 
-    print!("Height: ");
+    print!("Height(cm): ");
     io::stdout().flush().unwrap();
     let mut input = String::new();
 
@@ -37,5 +40,10 @@ fn main() {
     println!(
         "The rectangle has w:{}cm, h:{}cm. Its area is: {}cm",
         rectangle.width, rectangle.height, rectangle_area
-    )
+    );
+
+    println!(
+        "The rectangle has a nonzero width: {}",
+        rectangle.is_width_nonzero()
+    );
 }
